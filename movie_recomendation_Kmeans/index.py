@@ -52,3 +52,21 @@ Grupo = 0
 filtro = modelo.labels_ == Grupo
 moviesData[filtro].sample(7)
 
+"""Plotando o grááfico. O problema éé que temos 20 dimensões (colunas). Então vamos reduzir para vizualizar (vamos usar o TSNE, que éé muito util para visualização de dados)"""
+
+from sklearn.manifold import TSNE
+
+tsne = TSNE()
+visual =  tsne.fit_transform(scalledGenres)
+visual
+
+import seaborn as sns 
+
+# sóó aumentando o tamanho do plot
+sns.set(rc={'figure.figsize': (12,12)})
+
+sns.scatterplot(x = visual[:,0],
+                y = visual[:,1], hue=modelo.labels_,
+                palette= sns.color_palette("Set1", 3))
+
+"""No caso.... como reduzimos a dimensionalidade, perdemos informaçõões, entãão o grááfico ficou dessa forma, um pouco confuso e tudo bagunçado"""
